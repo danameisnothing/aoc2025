@@ -1,4 +1,4 @@
-package typesD1
+package typesD1P1
 
 import (
 	"fmt"

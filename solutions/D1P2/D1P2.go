@@ -1,11 +1,11 @@
-package d1p1
+package d1p2
 
 import (
 	"fmt"
 	"strconv"
 	"strings"
 
-	"github.com/danameisnothing/aoc2025/types/typesD1P1"
+	"github.com/danameisnothing/aoc2025/types/typesD1P2"
 )
 
 const (
@@ -15,16 +15,16 @@ const (
 )
 
 func Solve(input string) {
-	dial := typesD1P1.NewDial(StartNum, MaxThreshold, MinThreshold)
+	dial := typesD1P2.NewDial(StartNum, MaxThreshold, MinThreshold)
 
-	var timesIsZero int
+	var times int
 
 	for _, v := range strings.Split(input, "\n") {
 		if strings.TrimSpace(v) == "" {
 			continue
 		}
 
-		rotation, err := typesD1P1.Categorize(string(v[0]))
+		rotation, err := typesD1P2.Categorize(string(v[0]))
 		if err != nil {
 			panic(err)
 		}
@@ -35,16 +35,12 @@ func Solve(input string) {
 		}
 
 		switch rotation {
-		case typesD1P1.Left:
-			dial.DoLeft(num)
-		case typesD1P1.Right:
-			dial.DoRight(num)
-		}
-
-		if dial.GetNumber() == 0 {
-			timesIsZero++
+		case typesD1P2.Left:
+			times += dial.DoLeft(num)
+		case typesD1P2.Right:
+			times += dial.DoRight(num)
 		}
 	}
 
-	fmt.Printf("%v\n", timesIsZero)
+	fmt.Printf("%v\n", times)
 }

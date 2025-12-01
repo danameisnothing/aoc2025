@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	d1p1 "github.com/danameisnothing/aoc2025/solutions/D1P1"
+	d1p2 "github.com/danameisnothing/aoc2025/solutions/D1P2"
 )
 
 const (
@@ -20,10 +20,10 @@ L82`
 )
 
 func main() {
-	inp, err := os.ReadFile("inputs/D1/P1/input")
+	inp, err := os.ReadFile("inputs/D1/input")
 	if err != nil {
 		panic(err)
 	}
 
-	d1p1.Solve(string(inp))
+	d1p2.Solve(string(inp))
 }

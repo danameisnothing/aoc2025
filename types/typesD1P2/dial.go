@@ -1,4 +1,4 @@
-package typesD1
+package typesD1P2
 
 import (
 	"math"
@@ -22,7 +22,8 @@ func (d *Dial) GetNumber() int {
 	return d.number
 }
 
-func (d *Dial) DoLeft(amount int) {
+func (d *Dial) DoLeft(amount int) int {
+	var amt int
 	// maybe could be done with bit shifts, but i don't know how those work.
 	numLeft := amount
 	for {
@@ -31,15 +32,17 @@ func (d *Dial) DoLeft(amount int) {
 		if numLeft < 0 {
 			d.number = d.maximumThreshold + 1
 			numLeft = int(math.Abs(float64(numLeft)))
+			amt++
 			continue
 		}
 
 		d.number = numLeft
-		return
+		return amt
 	}
 }
 
-func (d *Dial) DoRight(amount int) {
+func (d *Dial) DoRight(amount int) int {
+	var amt int
 	// maybe could be done with bit shifts, but i don't know how those work.
 	numAdd := amount
 	for {
@@ -48,10 +51,11 @@ func (d *Dial) DoRight(amount int) {
 		if numAdd > d.maximumThreshold {
 			d.number = 0
 			numAdd -= d.maximumThreshold + 1
+			amt++
 			continue
 		}
 
 		d.number = numAdd
-		return
+		return amt
 	}
 }
