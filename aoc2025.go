@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	d2p1 "github.com/danameisnothing/aoc2025/solutions/D2P1"
+	d2p2 "github.com/danameisnothing/aoc2025/solutions/D2P2"
 )
 
 func main() {
@@ -12,5 +12,5 @@ func main() {
 		panic(err)
 	}
 
-	d2p1.Solve(string(inp))
+	d2p2.Solve(string(inp))
 }

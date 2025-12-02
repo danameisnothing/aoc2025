@@ -1,4 +1,4 @@
-package d2p1
+package d2p2
 
 import (
 	"fmt"
@@ -30,28 +30,38 @@ func Solve(input string) {
 
 		for i := lower; i <= upper; i++ {
 			numStr := strconv.Itoa(i)
-			// check if the length is even
-			if len(numStr)%2 != 0 {
+
+			var lastMatch string
+			for i := range len(numStr) {
+				// assuming every element is the same
+				matches := regexp.MustCompile(numStr[i+1:]).FindAll([]byte(numStr), -1)
+				if len(string(matches[0]))*len(matches) == len(numStr) {
+					lastMatch = numStr[i+1:]
+					break
+				}
+			}
+
+			// HACKHACK:
+			if lastMatch == "" {
 				continue
 			}
 
-			var lastMatch string
-			for i := range len(numStr) / 2 {
-				if !strings.Contains(numStr, numStr[i+1:]) {
+			var sb strings.Builder
+			for {
+				if sb.Len() >= len(numStr) {
 					break
 				}
 
-				lastMatch = numStr[i+1:]
-			}
+				sb.WriteString(lastMatch)
+				if sb.String() == numStr {
+					fmt.Printf("MATCH: %s\n", sb.String())
+					toAdd, err := strconv.Atoi(sb.String())
+					if err != nil {
+						panic(err)
+					}
 
-			comb := fmt.Sprintf("%s%s", lastMatch, lastMatch)
-			if comb == numStr {
-				toAdd, err := strconv.Atoi(comb)
-				if err != nil {
-					panic(err)
+					total += toAdd
 				}
-
-				total += toAdd
 			}
 		}
 	}
