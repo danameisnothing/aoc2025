@@ -19,7 +19,7 @@ func Solve(input string) {
 
 	var timesIsZero int
 
-	for _, v := range strings.Split(input, "\n") {
+	for v := range strings.SplitSeq(input, "\n") {
 		if strings.TrimSpace(v) == "" {
 			continue
 		}
